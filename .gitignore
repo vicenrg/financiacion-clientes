@@ -1,0 +1,78 @@
+# ===============================================
+# 📂 .gitignore — Exclusiones para proyectos de Data Science
+# Autor: Vicente Rueda
+# ===============================================
+
+# -----------------------------------------------
+# 🧪 Jupyter Notebooks
+# -----------------------------------------------
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+
+# -----------------------------------------------
+# 🐍 Python
+# -----------------------------------------------
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+*.pyo
+*.log
+
+# -----------------------------------------------
+# 🔒 Entornos virtuales
+# -----------------------------------------------
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# -----------------------------------------------
+# ⚙️ Archivos temporales del sistema
+# -----------------------------------------------
+.DS_Store
+Thumbs.db
+.Spotlight-V100
+.Trashes
+
+# -----------------------------------------------
+# 🛠️ Configuración de IDEs
+# -----------------------------------------------
+.vscode/
+.idea/
+.spyderproject
+.spyproject
+
+# -----------------------------------------------
+# 📦 Paquetes y dependencias
+# -----------------------------------------------
+*.egg-info/
+*.egg
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# -----------------------------------------------
+# 📁 Datos generados (no sensibles)
+# -----------------------------------------------
+outputs/
+data/cache/
+*.csv
+*.tsv
+*.parquet
+*.feather
+*.xls
+*.xlsx
+*.json
+*.zip
+*.gz
+*.tar
+
+# -----------------------------------------------
+# 🧾 Dependencias (regenerables, no necesarias en Git)
+# -----------------------------------------------
+environment.yml
+requirements.txt
