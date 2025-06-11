@@ -30,20 +30,7 @@ def mostrar_primeras_lineas(folder_key, filename, n=5, ancho_max=400):
         print(f"❌ Error al leer archivo: {e}")
 
 
-# -------------------------------------------------------------
-# 📊 Verificar si hay riesgo de sobreajuste por dimensionalidad
-# -------------------------------------------------------------
-# Evalúa si la relación registros/variables es adecuada para evitar sobreajuste.
-# -------------------------------------------------------------
-def verificar_dimensionalidad(df, umbral=100):
-    n_registros, n_variables = df.shape
-    print("\n📊 Verificación de la dimensionalidad:")
-    if n_registros >= n_variables * umbral:
-        print(f"✅ Adecuado: {n_registros} registros ≥ {n_variables} variables x {umbral}")
-        print("   No se detectan problemas de sobreajuste por alta dimensionalidad.")
-    else:
-        print(f"⚠️ Posible sobreajuste: {n_registros} < {n_variables} x {umbral}")
-    print(f"📈 Ratio registros/variable: {n_registros / n_variables:.2f}\n")
+
 
 
 

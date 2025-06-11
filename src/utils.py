@@ -89,11 +89,32 @@ def load_data(folder_key, filename):
     
 
 # -------------------------------------------------------------
-# 💾 Guardar DataFrame como CSV o PKL en la carpeta adecuada
+# 📊 Verificar si hay riesgo de sobreajuste por dimensionalidad
 # -------------------------------------------------------------
-# 📌 Guarda un DataFrame en la carpeta especificada con la extensión correcta (.pkl o .csv)
+# Evalúa si la relación registros/variables es adecuada para evitar sobreajuste.
+# -------------------------------------------------------------
+def verificar_dimensionalidad(df, umbral=100):
+    n_registros, n_variables = df.shape
+    print("\n📊 Verificación de la dimensionalidad:")
+    if n_registros >= n_variables * umbral:
+        print(f"✅ Adecuado: {n_registros} registros ≥ {n_variables} variables x {umbral}")
+        print("   No se detectan problemas de sobreajuste por alta dimensionalidad.")
+    else:
+        print(f"⚠️ Posible sobreajuste: {n_registros} < {n_variables} x {umbral}")
+    print(f"📈 Ratio registros/variable: {n_registros / n_variables:.2f}\n")
+    
+
+# -------------------------------------------------------------
+# 💾 Guardar archivo individual (PKL, CSV, JOBLIB)
 # -------------------------------------------------------------
 def guardar_archivo(obj, folder_key, filename, format="pkl"):
+    """
+    Guarda un archivo en la carpeta indicada y formato especificado.
+    - obj: objeto a guardar (DataFrame, modelo, etc.)
+    - folder_key: clave ('cache', 'processed', etc.)
+    - filename: nombre del archivo con extensión (sin ruta)
+    - format: 'pkl', 'csv' o 'joblib'
+    """
     path = get_file_path(folder_key, filename)
     path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -106,11 +127,23 @@ def guardar_archivo(obj, folder_key, filename, format="pkl"):
     else:
         raise ValueError("❌ Formato no soportado. Usa 'pkl', 'joblib' o 'csv'.")
 
-    print(f"✅ Archivo guardado en: {path}")
+    print(f"✅ Archivo guardado en: {path.relative_to(Path.cwd().resolve().parents[0])}")
 
 
 
-
+# -----------------------------------------------------------------
+# 💾 Guardar múltiples DataFrames en pkl y csv de forma profesional
+# -----------------------------------------------------------------
+def guardar_multiples_archivos(dataframes: dict):
+    """
+    Guarda múltiples DataFrames en formato .pkl y .csv en carpetas
+    'data/cache' y 'data/processed' respectivamente.
+    - dataframes: dict con estructura {'nombre': df}
+    """
+    for nombre_df, df_obj in dataframes.items():
+        for formato, carpeta in zip(['pkl', 'csv'], ['cache', 'processed']):
+            nombre_archivo = f"{nombre_df}.{formato}"
+            guardar_archivo(df_obj, carpeta, nombre_archivo, format=formato)
 
 
 
